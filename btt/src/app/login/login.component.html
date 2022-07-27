@@ -1,0 +1,19 @@
+<form [formGroup]="formgrouplogin" (ngSubmit)="onSubmit()" method="post" accept="/listdata">
+    <mat-form-field  class="taikhoan" appearance="outline" [hideRequiredMarker]="formgrouplogin.value">
+        <mat-label >Enter your email</mat-label>
+        <input  matInput  formControlName="taikhoan"  required>
+        <mat-error *ngIf="formgrouplogin.value.taikhoan.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+  <br>
+  <mat-form-field  class="matkhau" appearance="outline" [hideRequiredMarker]="formgrouplogin.value" >
+    <mat-label >Enter your password</mat-label>
+    <input  matInput  formControlName="matkhau" [type]="hide ? 'password' : 'text'" required>
+    <button class="hide" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    <mat-error *ngIf="formgrouplogin.value.matkhau.invalid">{{getErrorMessage2()}}</mat-error>
+  </mat-form-field>
+  <br>
+  <button type="submit" [disabled]="!formgrouplogin.valid"  class="but-submit" mat-button>Submit</button> 
+</form>
+

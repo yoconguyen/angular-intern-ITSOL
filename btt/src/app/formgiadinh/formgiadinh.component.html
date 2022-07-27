@@ -1,0 +1,27 @@
+
+
+    <ng-container [formGroup]="formgiadinh"  >
+      <mat-card formGroupName="giadinh" class="form-container">
+
+        <p>
+            <mat-form-field  appearance="outline">
+              <mat-label>so nha</mat-label>
+              <input pattern="[a-zA-Z ]*" matInput formControlName="sonha" placeholder="sonha" >
+            </mat-form-field>
+          
+          </p>
+          
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>dia chi</mat-label>
+              <input matInput formControlName="diachi" placeholder="diachi">
+            </mat-form-field>
+
+          </p>
+
+         
+
+       
+      </mat-card>
+   
+    </ng-container>

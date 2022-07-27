@@ -1,0 +1,11 @@
+@mixin mobi ($size:699px) {
+    @media (max-width:$size) {
+        @content
+    }
+};
+@mixin laptop ($size:700px) {
+    @media (min-width:$size) {
+        @content
+    }
+}
+$font-text:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

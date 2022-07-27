@@ -1,0 +1,45 @@
+<mat-dialog-content>
+    <div class="form">
+
+        <form [formGroup]="formlist"  >
+
+            <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Name</mat-label>
+                  <input pattern="[a-zA-Z ]*" matInput formControlName="name" placeholder="Name" >
+                </mat-form-field>
+                <mat-error *ngIf="formlist.controls['name'].hasError('pattern')">not !@#$%^^&*()_</mat-error>
+              
+              </p>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>address</mat-label>
+                  <input matInput formControlName="add" placeholder="address">
+                </mat-form-field>
+                <mat-error *ngIf="formlist.controls['add'].hasError('required')">required</mat-error>
+
+              </p>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>email</mat-label>
+                  <input matInput formControlName="email" placeholder="email">
+                </mat-form-field>
+                <mat-error *ngIf="formlist.controls['email'].hasError('email')">not email</mat-error>
+
+              </p>
+
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>phone</mat-label>
+                  <input matInput formControlName="phone" placeholder="phone">
+                </mat-form-field>
+                <mat-error *ngIf="formlist.controls['phone'].hasError('pattern')">not number</mat-error>
+
+              </p>
+
+           
+            <button type="submit" (click)="themsv()">thêm sinh viên</button><button type="submit" (click)="suasv()">sửa sinh viên</button>
+
+        </form>
+    </div>
+</mat-dialog-content>

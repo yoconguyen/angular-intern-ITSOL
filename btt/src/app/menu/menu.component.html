@@ -1,0 +1,93 @@
+<div class="tong">
+    <header class="tong-head">
+        <div> <button mat-stroked-button>HONES REVIEWS</button></div>
+        <div class="bt-menu">
+            <div class="bt">menu</div>
+            <div class="bt">computer</div>
+            <div class="bt">gadgets</div>
+            <div class="bt">contact</div>
+            <div class="bt" *ngIf="dates <10">vua xong</div>
+
+            <div class="bt" *ngIf="dates>=10">{{datep}} phut truoc</div>
+
+        </div>
+        <mat-icon [matMenuTriggerFor]="beforeMenu" class="mat-menu">menu</mat-icon>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item>menu</button>
+            <button mat-menu-item>computer</button>
+            <button mat-menu-item>gadgets</button>
+            <button mat-menu-item>contact</button>
+        </mat-menu>
+    </header>
+
+    <div class="content">
+        <div class="tong-title">
+            <div class="title"> Latest Product Review</div>
+            <div class="title-small">Starting a landing page or single page is easy with our modern theme due to the
+                features and flat easy-going design</div>
+        </div>
+        <!-- <mat-grid-list [cols]="cols" [rowHeight]="rowheard" (window:resize)="onResize($event)" >
+            <mat-grid-tile> -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6 col-lg-3 p-3">
+                    <div class="image"><img src="/assets/tải xuống (2).jpg"></div>
+                    <div class="content-product">
+                        <div class="date">May 9 2022</div>
+                        <div class="name-product">Bun dau mam tom</div>
+                        <div class="vb-product">BúnBún ,sihihgois igsjoisrjgoisg sgoirghoidrgjoisrjg srogihjsriogh
+                            sorigosirg orishgoishgoi groighosir kjvhkdjrghsrhg
+                            hgisuhgshfswh,srkghiurhg,sjgosw,orgwr,ogwsrugjiorhgirg erg </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3 p-3">
+                    <div class="image"><img src="/assets/tải xuống (2).jpg"></div>
+                    <div class="content-product">
+                        <div class="date">May 9 2022</div>
+                        <div class="name-product">Bun dau mam tom</div>
+                        <div class="vb-product">BúnBún ,sihihgois igsjoisrjgoisg sgoirghoidrgjoisrjg srogihjsriogh
+                            sorigosirg orishgoishgoi groighosir kjvhkdjrghsrhg
+                            hgisuhgshfswh,srkghiurhg,sjgosw,orgwr,ogwsrugjiorhgirg erg </div>
+                    </div>
+                </div>
+                <!-- </mat-grid-tile>
+            <mat-grid-tile> -->
+                <div class="col-sm-6 col-lg-3 p-3">
+                    <div class="image"><img src="/assets/tải xuống (2).jpg"></div>
+                    <div class="content-product">
+                        <div class="date">May 9 2022</div>
+                        <div class="name-product">Bun dau mam tom</div>
+                        <div class="vb-product">Bún ,sihihgois igsjoisrjgoisg sgoirghoidrgjoisrjg srogihjsriogh
+                            sorigosirg orishgoishgoi groighosir kjvhkdjrghsrhg
+                            hgisuhgshfswh,srkghiurhg,sjgosw,orgwr,ogwsrugjiorhgirg erg</div>
+                    </div>
+                </div>
+                <!-- </mat-grid-tile>
+            <mat-grid-tile> -->
+                <div class="col-sm-6 col-lg-3 p-3">
+                    <div class="image"><img src="/assets/tải xuống (2).jpg"></div>
+                    <div class="content-product">
+                        <div class="date">May 9 2022</div>
+                        <div class="name-product">Bun dau mam tom</div>
+                        <div class="vb-product">BúnBún ,sihihgois igsjoisrjgoisg sgoirghoidrgjoisrjg srogihjsriogh
+                            sorigosirg orishgoishgoi groighosir kjvhkdjrghsrhg
+                            hgisuhgshfswh,srkghiurhg,sjgosw,orgwr,ogwsrugjiorhgirg erg </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- </mat-grid-tile>
+
+        </mat-grid-list> -->
+        <div class="button-content"><button mat-stroked-button>View All Review</button></div>
+    </div>
+    <footer>
+
+        <div class="lorem">Lorem Ipsum</div>
+        <div class="lorem">Lorem Ipsum</div>
+        <div class="lorem">Lorem Ipsum</div>
+    </footer>
+
+<div class="ongbut" #ongbui><mat-icon (click)="closeob()">close</mat-icon><img src="/assets/145610710772.jpg" >  </div>
+</div>

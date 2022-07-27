@@ -1,0 +1,30 @@
+
+<ng-container [formGroup]="formbangcap">
+   
+      <mat-card formGroupName="bangcap" class="form-container">
+        <p>
+            <mat-form-field appearance="outline">
+              <mat-label>school</mat-label>
+              <input pattern="[a-zA-Z ]*" matInput formControlName="school" placeholder="school" >
+            </mat-form-field>
+          
+          </p>
+          
+          <p>
+            <mat-form-field  appearance="fill">
+                <mat-label>State</mat-label>
+                <mat-select formControlName="he">
+                  <mat-option >None</mat-option>
+                  <mat-option  *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+          </p>
+
+         
+
+       
+        <button mat-button color="primary" type="submit">submit</button>
+      </mat-card>
+ 
+
+  </ng-container>

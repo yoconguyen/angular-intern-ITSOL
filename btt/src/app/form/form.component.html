@@ -1,0 +1,25 @@
+<mat-form-field id="search"  appearance="outline">
+  <mat-label>search</mat-label>
+  <input  [matAutocomplete]="auto" class="inputsearch"  (keyup)="keyupsearch()" [(ngModel)]="value" pattern="[a-zA-Z ]*" matInput  placeholder="search..." >
+</mat-form-field>
+<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+  <mat-option *ngFor="let option of apisearch" [value]="option.name">
+    {{option.name}}
+  </mat-option>
+</mat-autocomplete>
+<!-- <div class="search">
+  <div *ngFor="let item of apisearch" (click)="clicksearch(item.name)" class="searchcontent">{{item.name}}</div>
+  
+</div> -->
+
+<form action="#" [formGroup]="option" (ngSubmit)="onsubmit()">
+
+<app-formcanhan></app-formcanhan>
+
+
+<app-formbangcap></app-formbangcap>
+<app-formgiadinh></app-formgiadinh>
+<p>
+    <button mat-button color="warn" type="submit">nhap</button>
+  </p>
+</form>

@@ -1,0 +1,19 @@
+table{
+    width: 80%;
+}
+.tong{
+    
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.527);
+    z-index: 99;
+   display: none;
+}
+.dialog {
+    display: none;
+}
+.openform{
+    display: block;
+}

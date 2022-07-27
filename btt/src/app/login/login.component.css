@@ -1,0 +1,25 @@
+.hide{
+    border: none;
+    background-color: rgba(250, 235, 215, 0);
+}
+.taikhoan{
+    position: relative;
+    top:25px;
+    font-size: 15px;
+    width:400px ;
+
+}
+.matkhau{
+    position: relative;
+    top:25px;
+    font-size: 15px;
+    width:400px;
+
+}
+.but-submit{
+    margin-top:30px ;
+    background-color: rgb(0, 171, 85);
+    width: 400px;
+    height: 48px;
+    color: white;
+}

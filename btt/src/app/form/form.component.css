@@ -1,0 +1,28 @@
+#search{
+    width: 300px;
+    font-size: 14px;
+}
+.search{
+    overflow: auto;
+    width: 300px;
+    max-height: 200px;
+    background-color: white;
+    border-radius:12px ;
+    padding-top:10px ;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    display: none;
+}
+.opensearch{
+    display: block;
+}
+.searchcontent{
+  
+    border-bottom:1px solid rgb(235, 235, 217) ;
+    padding-top:10px ;
+    padding-left:30px ;
+    box-sizing: border-box;
+    height: 40px;
+    background-color: white;
+}

@@ -1,0 +1,28 @@
+<div class="form">
+
+    <ng-container [formGroup]="formcanhan"  >
+      <mat-card formGroupName="canhan" class="form-container">
+
+        <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input pattern="[a-zA-Z ]*" matInput formControlName="name" placeholder="Name" >
+            </mat-form-field>
+          
+          </p>
+          
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>email</mat-label>
+              <input matInput formControlName="email" placeholder="email">
+            </mat-form-field>
+
+          </p>
+
+         
+
+       
+        <button mat-button color="primary" type="submit">submit</button>
+      </mat-card>
+    </ng-container>
+</div>

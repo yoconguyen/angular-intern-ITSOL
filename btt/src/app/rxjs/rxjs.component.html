@@ -1,0 +1,31 @@
+<p>rxjs works!</p>
+<input [matAutocomplete]="auto" (keyup)="keyup()" [formControl]="name" type="text" id="search-box"
+  placeholder="Search car">
+<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+  <mat-option *ngFor="let option of observalble|async" [value]="option.name">
+    {{option.name}}
+  </mat-option>
+</mat-autocomplete>
+<br>
+<br>
+<form class="example-form">
+  <input type="text" placeholder="Search for a street" [formControl]="control" [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let street of filteredStreets | async" [value]="street">
+      {{street}}
+    </mat-option>
+  </mat-autocomplete>
+</form>
+<br><br>
+<div (click)="download()">Download</div>
+<br><br>
+<button mat-button [matMenuTriggerFor]="menu">xin chao!{{nameinput}}</button>
+<mat-menu #menu="matMenu">
+  <button (click)="clickmenu(item)" *ngFor="let item of dataname" mat-menu-item>{{item}}</button>
+
+
+</mat-menu>
+<br>
+<input #myTextArea (click)="click(myTextArea)" (keyup)="click(myTextArea)" [formControl]="test" id="a"
+  (keydown)="xoachuoi($event)" type="text">
+<br>
