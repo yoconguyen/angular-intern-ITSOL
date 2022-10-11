@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  hoang='1';
   hide=true;
   formgrouplogin = new FormGroup({
     taikhoan: new FormControl('', [Validators.required, Validators.email]),
@@ -34,5 +35,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     this.router.navigateByUrl('/listdata');
+  }
+  hoangTest(){
+    console.log("jxhkajsdkj")
   }
 }

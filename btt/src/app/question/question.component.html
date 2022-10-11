@@ -1,0 +1,388 @@
+<div class="question" (click)="openDialogQues()">
+  <div>câu hỏi khảo sát</div><button>thêm câu hỏi</button>
+</div>
+<div *ngFor="let item of arrayQuestionCheckbox,let i=index" class="question-checkbox">
+
+
+  <div style="display: flex;justify-content: flex-end;">
+    <mat-icon (click)="copyQues(i)">filter_none</mat-icon>
+    <mat-icon (click)="deleteQues(i)">delete</mat-icon>
+  </div>
+  <!-- checkbox -->
+  <div *ngIf="item.type=='checkbox'" class="content-cauhoi">
+    <div class="cauhoi"><span *ngIf="item.isCheckedsure==true" style="color: red;">*</span>Câu số {{i+1}} :
+      {{item.name}}</div>
+    <div *ngFor="let item of item.array">
+      <input disabled="true" type="checkbox">
+      {{item.input}} <div *ngIf="isString(item.img)"><img [src]="item.img" height="30px" width="30px"></div>
+    </div>
+    <div *ngIf="item.isCheckTextbox"><input disabled="true" type="checkbox"> Khác...</div>
+  </div>
+  <!-- radio -->
+  <div *ngIf="item.type=='radio'" class="content-cauhoi">
+    <div class="cauhoi"><span *ngIf="item.isCheckedsure==true" style="color: red;">*</span>Câu số {{i+1}} :
+      {{item.name}}</div>
+
+    <div *ngFor="let item of item.array">
+      <input disabled="true" type="radio">
+      {{item.input}} <div *ngIf="isString(item.img)"><img [src]="item.img" height="30px" width="30px"></div>
+    </div>
+    <div *ngIf="item.isCheckTextbox"><input disabled="true" type="radio"> Khác...</div>
+  </div>
+
+
+  <!-- van ban -->
+  <div *ngIf="item.type=='văn bản'" class="content-cauhoi">
+    <div class="cauhoi"><span *ngIf="item.isCheckedsure==true" style="color: red;">*</span>Câu số {{i+1}} :
+      {{item.name}}</div>
+
+    <textarea disabled="true" class="form-control" rows="3" type="text" placeholder="Nhập câu trả lời..."></textarea>
+  </div>
+
+  <!-- text lí do -->
+  <div *ngIf="item.type=='text lí do'" class="content-cauhoi">
+    <div class="cauhoi"><span *ngIf="item.isCheckedsure==true" style="color: red;">*</span>Câu số {{i+1}} :
+      {{item.name}}</div>
+
+    <div *ngIf="item.isCheckedType">
+      <div *ngFor="let item1 of item.array">
+        <input disabled="true" type="checkbox">
+        {{item1.input}} <div *ngIf="isString(item1.img)"><img [src]="item1.img" height="30px" width="30px">
+        </div>
+        <div><span *ngIf="item.isCheckedlido==true" style="color: red;">*</span> Nhập lí do...</div>
+      </div>
+      <div *ngIf="item.isCheckTextbox"><input disabled="true" type="checkbox"> Khác...</div>
+    </div>
+
+    <div *ngIf="item.isCheckedType==false">
+      <div *ngFor="let item1 of item.array">
+        <input disabled="true" type="radio">
+        {{item1.input}} <div *ngIf="isString(item1.img)"><img [src]="item1.img" height="30px" width="30px">
+        </div>
+        <div><span *ngIf="item.isCheckedlido==true" style="color: red;">*</span> Nhập lí do...</div>
+      </div>
+      <div *ngIf="item.isCheckTextbox"><input disabled="true" type="radio"> Khác...</div>
+    </div>
+  </div>
+
+
+
+  <!-- check box li do -->
+  <div *ngIf="item.type=='checkbox lí do'" class="content-cauhoi">
+    <div class="cauhoi"><span *ngIf="item.isCheckedsure==true" style="color: red;">*</span>Câu số {{i+1}} :
+      {{item.name}}</div>
+
+    <!-- item.isCheckedType==checkbox -->
+    <div *ngIf="item.isCheckedType">
+      <div *ngFor="let item1 of item.array">
+
+        <input disabled="true" type="checkbox">
+        {{item1.input}} <div *ngIf="isString(item1.img)"><img [src]="item1.img" height="30px" width="30px">
+        </div>
+        <div>
+          <section style="margin-left: 30px;">
+            <div *ngIf="item1.inputChild?.type== 'checkbox'">
+              <div *ngFor="let item2 of item1.inputChild?.data">
+                <span *ngIf="item1.inputChild?.isCheckedsure==true" 
+                      style="color: red;">*</span>
+                <input disabled="true" type="checkbox">
+                {{isString(item2.input) ? item2.input : ''}}
+              </div>
+              <div *ngIf="item1.inputChild?.isCheckTextbox"><span *ngIf="item1.inputChild?.isCheckedsure==true"
+                  style="color: red;">*</span><input disabled="true" type="checkbox"> Khác...</div>
+
+
+            </div>
+            <div *ngIf="item1.inputChild?.type== 'radio'">
+              <div *ngFor="let item2 of item1.inputChild?.data">
+                <span *ngIf="item1.inputChild?.isCheckedsure==true" style="color: red;">*</span> <input disabled="true"
+                  type="radio">
+                {{isString(item2.input) ? item2.input : ''}}
+              </div>
+              <div *ngIf="item1.inputChild?.isCheckTextbox"><span *ngIf="item1.inputChild?.isCheckedsure==true"
+                  style="color: red;">*</span><input disabled="true" type="radio"> Khác...</div>
+            </div>
+          </section>
+        </div>
+
+      </div>
+      <div *ngIf="item.isCheckTextbox"><input disabled="true" type="checkbox"> Khác...</div>
+    </div>
+    <!-- item.isCheckedType==radio -->
+    <div *ngIf="item.isCheckedType==false">
+
+      <div *ngFor="let item1 of item.array">
+
+        <input disabled="true" type="radio">
+        {{item1.input}} <div *ngIf="isString(item1.img)"><img [src]="item1.img" height="30px" width="30px">
+        </div>
+        <div>
+          <section style="margin-left: 30px;">
+            <div *ngIf="item1.inputChild?.type== 'checkbox'">
+              <div *ngFor="let item2 of item1.inputChild?.data">
+                <span *ngIf="item1.inputChild?.isCheckedsure==true" style="color: red;">*</span> <input disabled="true"
+                  type="checkbox">
+                {{isString(item2.input) ? item2.input : ''}}
+              </div>
+              <div *ngIf="item1.inputChild?.isCheckTextbox"> <span *ngIf="item1.inputChild?.isCheckedsure==true"
+                  style="color: red;">*</span><input disabled="true" type="checkbox"> Khác...</div>
+
+
+            </div>
+            <div *ngIf="item1.inputChild?.type== 'radio'">
+              <div *ngFor="let item2 of item1.inputChild?.data">
+                <span *ngIf="item1.inputChild?.isCheckedsure==true" style="color: red;">*</span> <input disabled="true"
+                  type="radio">
+                {{isString(item2.input) ? item2.input : ''}}
+              </div>
+              <div *ngIf="item1.inputChild?.isCheckTextbox"> <span *ngIf="item1.inputChild?.isCheckedsure==true"
+                  style="color: red;">*</span><input disabled="true" type="radio"> Khác...</div>
+            </div>
+          </section>
+        </div>
+
+      </div>
+      <div *ngIf="item.isCheckTextbox"><input disabled="true" type="radio"> Khác...</div>
+
+    </div>
+  </div>
+</div>
+<!-- cxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<hr>
+<div class="all">
+  <div class="header1">
+    <div>KHẢO SÁT NGƯỜI DÙNG SEANET</div>
+  </div>
+  <div class="content">
+    <div class="mo-ta">
+      <div class="mota-head">Mô tả khảo sát</div>
+      <div>Lưu ý: khi user nhấn xuất excel, hệ thống sẽ chỉ xuất thông tin bằng thống kê từng người khảo sát và thống kê
+        số lượng người trả lời từng đáp án của từng câu hỏi chứ không thể xuất biểu đồ cột trên cùng</div>
+    </div>
+    <button class="but-start" mat-raised-button>Bắt đầu khảo sát</button>
+
+    <div *ngFor="let item of arrayQuestionCheckbox,let i=index" style="width: 100%;">
+
+      <div class="answer-content">
+        <div class="mo-ta-content">
+          <!-- checkbox -->
+          <div *ngIf="item.type=='checkbox'" class="content-cauhoi">
+            <div class="cauhoi"><span *ngIf="item.isCheckedsure==true" style="color: red;">*</span>Câu số {{i+1}} :
+              {{item.name}}</div>
+            <div *ngFor="let item1 of item.array,let ichilren=index">
+              <mat-checkbox (change)="changeCheckbox($event,i,item1,ichilren)">
+                {{item1.input}} <div *ngIf="isString(item1.img)"><img [src]="item1.img" height="30px" width="30px">
+                </div>
+              </mat-checkbox>
+            </div>
+            <!-- <mat-checkbox [disabled]="!checkbox.value.trimStart()"  #checkboxicon *ngIf="item.isCheckTextbox" (change)="changeCheckboxkhac($event,i,checkbox,checkboxicon)"><input #checkbox placeholder="Khác..." class="form-control" type="text" > </mat-checkbox> -->
+            <mat-checkbox (change)="changeCheckboxkhac($event,i)" *ngIf="item.isCheckTextbox">Khác</mat-checkbox>
+          </div>
+          <!-- radio -->
+          <div *ngIf="item.type=='radio'" class="content-cauhoi">
+            <div class="cauhoi"><span *ngIf="item.isCheckedsure==true" style="color: red;">*</span>Câu số {{i+1}} :
+              {{item.name}}</div>
+            <mat-radio-group>
+              <div *ngFor="let item1 of item.array,let ichilren=index">
+
+                <mat-radio-button [value]="item1" (change)="changeRadio($event,i,item1,ichilren)">
+                  {{item1.input}}
+                  <div *ngIf="isString(item1.img)">
+                    <img [src]="item1.img" height="30px" width="30px">
+                  </div>
+                </mat-radio-button>
+
+              </div>
+              <!-- <mat-radio-button [disabled]="!checkradio.value.trimStart()" [value]="false" #checkradioicon *ngIf="item.isCheckTextbox" (change)="changeCheckradiokhac($event,i,checkradio,checkradioicon)"><input #checkradio placeholder="Khác..." class="form-control" type="text" > </mat-radio-button> -->
+              <mat-radio-button value="false" (change)="changeCheckradiokhac($event,i)">Khác</mat-radio-button>
+            </mat-radio-group>
+
+          </div>
+
+
+          <!-- van ban -->
+          <div *ngIf="item.type=='văn bản'" class="content-cauhoi">
+            <div class="cauhoi"><span *ngIf="item.isCheckedsure==true" style="color: red;">*</span>Câu số {{i+1}} :
+              {{item.name}}</div>
+
+            <textarea (change)="changeText($event,i)" class="form-control" rows="3" type="text"
+              placeholder="Nhập câu trả lời..."></textarea>
+          </div>
+
+          <!-- text lí do -->
+          <div *ngIf="item.type=='text lí do'" class="content-cauhoi">
+            <div class="cauhoi"><span *ngIf="item.isCheckedsure==true" style="color: red;">*</span>Câu số {{i+1}} :
+              {{item.name}}</div>
+
+            <div *ngIf="item.isCheckedType">
+              <div *ngFor="let item1 of item.array,let ichilren=index">
+                <mat-checkbox #textlido (change)="changeTextlido($event,i,item1,checktextlido,textlido,ichilren)">
+                  {{item1.input}} <div *ngIf="isString(item1.img)"><img [src]="item1.img" height="30px" width="30px">
+                  </div>
+                  <input #checktextlido placeholder="Nhập lí do..." class="form-control" type="text">
+                </mat-checkbox>
+                <span *ngIf="item.isCheckedlido==true" style="color: red;">*</span>
+
+              </div>
+              <mat-checkbox *ngIf="item.isCheckTextbox" #textlidokhac
+                (change)="changeTextlidokhac(i,checktextlidokhac,textlidokhac)">
+                <div>Khác</div>
+                <input #checktextlidokhac placeholder="Nhập lí do..." class="form-control" type="text">
+              </mat-checkbox>
+
+            </div>
+
+            <div *ngIf="item.isCheckedType==false">
+              <mat-radio-group value="false">
+                <div *ngFor="let item1 of item.array">
+
+                  <mat-radio-button #textlidoradio
+                    (change)="changeTextlidoRadio($event,i,item1,textlidoradio,inputtextlido)">
+                    {{item1.input}} <div *ngIf="isString(item1.img)"><img [src]="item1.img" height="30px" width="30px">
+                    </div>
+                    <input #inputtextlido placeholder="Nhập lí do..." class="form-control" type="text">
+                  </mat-radio-button>
+
+                </div>
+                <mat-radio-button *ngIf="item.isCheckTextbox" #checklidoradiokhac
+                  (change)="changeTextradiolidokhac(i,inputlidokhac,checklidoradiokhac)">
+                  <div>Khác</div>
+                  <input #inputlidokhac placeholder="Nhập lí do..." class="form-control" type="text">
+                </mat-radio-button>
+              </mat-radio-group>
+
+            </div>
+          </div>
+
+          <!-- check box li do -->
+          <div *ngIf="item.type=='checkbox lí do'" class="content-cauhoi">
+            <div class="cauhoi"><span *ngIf="item.isCheckedsure==true" style="color: red;">*</span>Câu số {{i+1}} :
+              {{item.name}}</div>
+
+            <!-- item.isCheckedType==checkbox -->
+            <div *ngIf="item.isCheckedType">
+              <div *ngFor="let item1 of item.array,let ichid=index">
+                <pre>{{item1 | json}}</pre>
+                <mat-checkbox #checklidobox (change)="changeChecklido($event,i,item1,checklidobox,ichid)">
+                  {{item1.input}} <div *ngIf="isString(item1.img)"><img [src]="item1.img" height="30px" width="30px">
+                  </div>
+                </mat-checkbox>
+                <div>
+                  <section style="margin-left: 30px;">
+                    <div *ngIf="item1.inputChild?.type== 'checkbox'">
+                      
+                      <div *ngFor="let item2 of item1.inputChild?.data,let ichid1=index">
+                        <span *ngIf="item1.inputChild?.isCheckedsure==true" style="color: red;">*</span>
+                        <!-- <form [formGroup]="form" novalidate>  -->
+                        <mat-checkbox [checked]="checklidobox.checked?false:null" #checklidoboxchild
+                          (click)="checklidobox.checked=true"
+                          (change)="checkboxchild($event,i,ichid,item1,item2,checklidoboxchild,checklidobox)">
+                          {{isString(item2.input) ? item2.input : ''}}
+                        </mat-checkbox>
+                        <!-- </form> -->
+                      </div>
+                      <!-- <div *ngIf="item1.inputChild?.isCheckTextbox"><span *ngIf="item1.inputChild?.isCheckedsure==true"
+                  style="color: red;">*</span><input disabled="true" type="checkbox"> Khác...</div> -->
+                      <!-- <form [formGroup]="form" novalidate>  -->
+                      <mat-checkbox [checked]="checklidobox.checked?false:null" *ngIf="item1.inputChild?.isCheckTextbox"
+                        #checkboxlidokhac (change)="changechecklidokhac(i,item1,checkboxlidokhac)"
+                        (click)="checklidobox.checked=true">
+                        <div>Khác</div>
+                      </mat-checkbox>
+                      <!-- </form> -->
+                    </div>
+                    <div *ngIf="item1.inputChild?.type== 'radio'">
+                      <mat-radio-group value="false">
+                        <div *ngFor="let item2 of item1.inputChild?.data">
+                          <span *ngIf="item1.inputChild?.isCheckedsure==true" style="color: red;">*</span>
+                          <mat-radio-button [checked]="checklidobox.checked?false:null" #radiolidoboxchild
+                            (click)="checklidobox.checked=true"
+                            (change)="radioboxchild(i,item1,item2,radiolidoboxchild)">
+                            {{isString(item2.input) ? item2.input : ''}}
+                          </mat-radio-button>
+                        </div>
+                        <mat-radio-button [checked]="checklidobox.checked?false:null"
+                          *ngIf="item1.inputChild?.isCheckTextbox" #radioboxlidokhac
+                          (change)="radioboxchildkhac(i,item1,radioboxlidokhac)" (click)="checklidobox.checked=true">
+                          <div>Khác</div>
+                        </mat-radio-button>
+                      </mat-radio-group>
+                      <!-- <div *ngIf="item1.inputChild?.isCheckTextbox"><span *ngIf="item1.inputChild?.isCheckedsure==true"
+                  style="color: red;">*</span><input disabled="true" type="radio"> Khác...</div> -->
+                    </div>
+                  </section>
+                </div>
+
+              </div>
+              <mat-checkbox (change)="changeCheckboxlidokhac($event,i)" *ngIf="item.isCheckTextbox">Khác</mat-checkbox>
+            </div>
+            <!-- item.isCheckedType==radio -->
+            <div *ngIf="item.isCheckedType==false">
+              <mat-radio-group value="false">
+                <div *ngFor="let item1 of item.array">
+
+                  <mat-radio-button #radiolidobox (change)="changeradiolido($event,i,item1,radiolidobox)">
+                    {{item1.input}} <div *ngIf="isString(item1.img)"><img [src]="item1.img" height="30px" width="30px">
+                    </div>
+                  </mat-radio-button>
+                  <div>
+                    <section style="margin-left: 30px;">
+                      <div *ngIf="item1.inputChild?.type== 'checkbox'">
+                        <div *ngFor="let item2 of item1.inputChild?.data">
+                          <span *ngIf="item1.inputChild?.isCheckedsure==true" style="color: red;">*</span>
+                          <mat-checkbox #radiolidoboxchildbox [checked]="radiolidobox.checked?false:null"
+                          (click)="radiolidobox.checked=true"  (change)="radioboxchildbox($event,i,item1,item2,radiolidoboxchildbox)">
+                            {{isString(item2.input) ? item2.input : ''}}
+                          </mat-checkbox>
+                        </div>
+                        <div *ngIf="item1.inputChild?.isCheckTextbox"> <span
+                            *ngIf="item1.inputChild?.isCheckedsure==true" style="color: red;">*</span>
+                          <mat-checkbox *ngIf="item1.inputChild?.isCheckTextbox" #changeRadioboxlidokhacbox
+                           [checked]="radiolidobox.checked?false:null"  (click)="radiolidobox.checked=true"
+                            (change)="changeRadioboxlidokhac($event,i,item1,changeRadioboxlidokhacbox)">
+                            <div>Khác</div>
+                          </mat-checkbox>
+                        </div>
+
+
+                      </div>
+                      <div *ngIf="item1.inputChild?.type== 'radio'">
+                        <mat-radio-group value="false">
+                          <div *ngFor="let item2 of item1.inputChild?.data">
+                            <span *ngIf="item1.inputChild?.isCheckedsure==true" style="color: red;">*</span>
+                            <mat-radio-button  (click)="radiolidobox.checked=true" [checked]="radiolidobox.checked?false:null" #radiolidoboxchildradio
+                              (change)="radiolidoboxchildOfRadio(i,item1,item2,radiolidoboxchildradio)">
+                              {{isString(item2.input) ? item2.input : ''}}
+                            </mat-radio-button>
+                          </div>
+                          <div *ngIf="item1.inputChild?.isCheckTextbox">
+                            <mat-radio-button  (click)="radiolidobox.checked=true" [checked]="radiolidobox.checked?false:null" *ngIf="item1.inputChild?.isCheckTextbox" #radioboxlidokhacradio
+                            (change)="radioboxchildkhacOfRadio(i,item1,radioboxlidokhacradio)" >
+                              <div>Khác</div>
+                            </mat-radio-button>
+                            
+                          </div>
+                        </mat-radio-group>
+
+                      </div>
+                    </section>
+                  </div>
+
+                </div>
+                <mat-radio-button *ngIf="item.isCheckTextbox" #radiopaserboxlidokhac
+                  (change)="radioboxkhac(i,item,radiopaserboxlidokhac)">
+                  <div>Khác</div>
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <!-- end -->
+        </div>
+      </div>
+
+    </div>
+    <button (click)="clickhoanthanh()"> HOAN THANH </button>
+
+  </div>
+
+</div>

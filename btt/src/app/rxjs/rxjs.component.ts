@@ -1,15 +1,17 @@
 import { query } from '@angular/animations';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, delay, distinctUntilChanged, filter, fromEvent, map, Observable, of, startWith, switchMap, tap } from 'rxjs';
+import { Router, Routes } from '@angular/router';
+import { debounceTime, delay, distinctUntilChanged,takeUntil, filter, fromEvent, interval, map, Observable, of, startWith, switchMap, tap, exhaustMap, timer, merge } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { ServieceService } from '../serviece.service';
+import { ServieceService } from '../service/serviece.service';
+import { TestTableService } from '../test-table/test-table.service';
 @Component({
   selector: 'app-rxjs',
   templateUrl: './rxjs.component.html',
   styleUrls: ['./rxjs.component.css']
 })
-export class RxjsComponent implements OnInit {
+export class RxjsComponent implements OnInit ,OnDestroy{
   @ViewChild('searchInput')
   input!: ElementRef
   filteredStreets: any
@@ -18,27 +20,43 @@ export class RxjsComponent implements OnInit {
   dataname = ['HOANG', "HUNG", 'LINH']
   name = new FormControl('');
   test = new FormControl(this.bien)
-
+subj:String="";
   constructor(
-    private serviece: ServieceService
-  ) { }
-  array: any = []
+
+    private ro:Router,
+    private serviece: ServieceService,
+    private ser:TestTableService
+  ) { 
+    console.log('ChildComponent:OnDestroy');
+  }
+  array: any = [{a:"aaa",b:"bbb"},{a:"aaa11",b:"bbb22"}]
   data: any
   value: any = ""
   filter: any
   observalble: any
   ngOnInit(): void {
+this.ser.subject$.subscribe(data=>{
+  console.log(data);
+  debugger
+  this.subj=data})
     this.getapi1()
-
+this.event()
     this.filteredStreets = this.control.valueChanges.pipe(
       startWith(''),
       map((value: any) => {
+console.log(value);
 
         return this._filter(value)
       }),
     );
 
   }
+
+event(){
+ this.array.push({a:"aaa33",b:"bbb32"})
+ console.log(this.array)
+}
+
   caretPos: number = 0;
 
   click(oField: any) {
@@ -63,7 +81,6 @@ export class RxjsComponent implements OnInit {
         let a=this.test.value.replace(' '+this.dataname[0]+' ','')+' '
         this.test.setValue(a)
         this.caretPos=0
-        console.log('hoang')
        }
       if (this.test.value.includes(' ' + this.dataname[1] + ' ') &&  this.caretPos>(this.test.value.search(' ' + this.dataname[1] + ' ')) && this.caretPos<=this.test.value.search(' ' + this.dataname[1] + ' ') + 6) {
 
@@ -71,7 +88,6 @@ export class RxjsComponent implements OnInit {
         this.test.setValue(b)
         this.caretPos=0
 
-        console.log('hung')
       }
       if (this.test.value.includes(' ' + this.dataname[2] + ' ') &&this.caretPos>this.test.value.search(' ' + this.dataname[2] + ' ') && this.caretPos<=this.test.value.search(' ' + this.dataname[2] + ' ') + 6) {
 
@@ -79,7 +95,6 @@ export class RxjsComponent implements OnInit {
         this.test.setValue(c)
         this.caretPos=0
 
-        console.log('linh')
 
       }
 
@@ -146,5 +161,19 @@ export class RxjsComponent implements OnInit {
         URL.revokeObjectURL(objectUrl);
       })
   }
+a(){
+  // let a=timer(5000)
+  //   interval(1000).pipe(
+  //    takeUntil(a)
+  //   ).subscribe(data=>console.log(data))
+  let a=true
+  // merge(of(a=false).pipe(delay(3000)), of(a=true)).subscribe(data=>console.log(data));
+  of('world').pipe(startWith(a=false)).subscribe(data=>{console.log(data)
 
+  });
+  console.log(a)
+}
+ngOnDestroy() {
+  console.log('ChildComponent:OnDestroy');
+}
 }

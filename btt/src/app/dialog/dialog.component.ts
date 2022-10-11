@@ -1,11 +1,10 @@
-import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, Inject, OnChanges, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ServieceService } from '../serviece.service';
+import { ServieceService } from '../service/serviece.service';
 import { Route, Router } from '@angular/router';
 import { ListdataComponent } from '../listdata/listdata.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { async } from '@angular/core/testing';
-import { query } from '@angular/animations';
+
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',

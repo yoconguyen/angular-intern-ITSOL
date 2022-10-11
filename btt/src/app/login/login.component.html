@@ -16,4 +16,4 @@
   <br>
   <button type="submit" [disabled]="!formgrouplogin.valid"  class="but-submit" mat-button>Submit</button> 
 </form>
-
+<button *ngIf="hoang=='1'" (click)="hoangTest()" mat-button>update</button>

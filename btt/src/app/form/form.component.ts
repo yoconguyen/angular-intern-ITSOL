@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { from, map, observable, Observable, of, startWith } from 'rxjs';
-import { ServieceService } from '../serviece.service';
+import { ServieceService } from '../service/serviece.service';
 
 @Component({
   selector: 'app-form',

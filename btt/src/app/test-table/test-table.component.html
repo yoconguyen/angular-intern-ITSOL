@@ -1,0 +1,16 @@
+<input (change)="changefile($event)"   type="file"
+
+>
+<br>
+<div>
+  <label for="inputTag">
+    Select Image <br/>
+    <!-- <mat-icon class="fa fa-2x fa-camera">home</mat-icon> -->
+    <input id="inputTag" type="file"/>
+    <br/>
+    <span id="imageName"></span>
+  </label>
+</div>
+<button (click)="clicktest()">click</button>
+<button (click)="closetest()">close</button>
+<button (click)="onInput($event)">test</button>

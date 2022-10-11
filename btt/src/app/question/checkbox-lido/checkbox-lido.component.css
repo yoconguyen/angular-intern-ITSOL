@@ -1,0 +1,13 @@
+.mat-dialog-content{
+  max-height: 79%;
+}
+.type-ques{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.mat-dialog-actions{
+  display: flex;
+  justify-content:  space-evenly;
+}

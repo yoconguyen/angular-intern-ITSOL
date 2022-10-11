@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, Pipe, PipeTransform, SimpleChanges } from '@angular/core';
-import { ServieceService } from '../serviece.service';
+import { ServieceService } from '../service/serviece.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DialogComponent } from '../dialog/dialog.component';

@@ -1,0 +1,8 @@
+{
+  "welcomeMessage": "ok 2222222222 Thanks for joining, {{ firstName }}! It's great to have you!",
+  "login": {
+    "username": "Enter your user name",
+    "password": "Password here"
+  },
+  "HOANG":"hoang"
+}

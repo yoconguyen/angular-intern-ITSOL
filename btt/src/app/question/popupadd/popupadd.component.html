@@ -1,0 +1,418 @@
+<h4 mat-dialog-title>Câu số {{data.length+1}}</h4>
+<div mat-dialog-content>
+<div class="row mt-3">
+  <div class="col-4">
+    <label>Tên câu hỏi :</label>
+  </div>
+  <div class="col-8">
+    <input style="border:none ; border-bottom:1px solid black" class="form-control" type="text" [(ngModel)]="nameQuestion" placeholder="nhập tên câu hỏi">
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-4">
+    <label>Loại câu hỏi :</label>
+  </div>
+  <div class="col-8"> 
+    <select  [(ngModel)]="value"  class="form-control">
+      <option value="">Tất cả</option>
+      <option *ngFor="let envi of a" [ngValue]="envi">
+          {{envi}}
+      </option>
+  </select>
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-4">
+    <label>Kiểu trả lời :</label>
+  </div>
+  <div class="col-8">
+    <select [(ngModel)]="typeQues"  class="form-control">
+      <option #box value="">Tất cả</option>
+      <option  *ngFor="let envi of b" [ngValue]="envi" >
+          {{envi}}
+      </option>
+  </select>
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-4">
+    <label>Mô tả :</label>
+  </div>
+  <div class="col-8">
+    <input [(ngModel)]="valueDescribe" type="text" class="form-control" placeholder="nhập mô tả">
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-4">
+    <label>Bắt buộc :</label>
+  </div>
+  <div class="col-8"> 
+    <mat-slide-toggle
+    class="example-margin"
+    color="Primary"  [(ngModel)]="isCheckedsure">
+</mat-slide-toggle>
+  </div>
+</div>
+
+
+
+<div class="" >
+  <div *ngIf="value=='chọn đáp án' && typeQues=='text lí do' || value=='chọn đáp án' && typeQues=='checkbox lí do'" class="row">
+    <div class="col-4">
+     Chọn nhiều  :
+    </div>
+    <div class="col-8"> 
+      <mat-slide-toggle
+      [(ngModel)]="isCheckedType"
+      class="example-margin"
+      color="Primary">
+  </mat-slide-toggle>
+    </div>
+  </div>
+</div>
+
+<div class="row"  *ngIf="value=='chọn đáp án' && typeQues=='text lí do'">
+  <div class="col-4">
+    <label>Bắt buộc nhập text lí do:</label>
+  </div>
+  <div class="col-8"> 
+    <mat-slide-toggle
+    class="example-margin"
+    color="Primary"  [(ngModel)]="isCheckedlido">
+</mat-slide-toggle>
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col-4">
+    <label>Câu trả lời :</label>
+  </div>
+  
+<!-- check box -->
+<hr>
+  
+    <div  *ngIf="value=='chọn đáp án' && typeQues=='checkbox'" class="content-type1">
+      <div class="col-4">
+        <input disabled="true" type="checkbox"> Đã sử dụng</div>
+           
+
+<div>
+  <div class="row" style="margin-left: 5px;">
+    <div class="col-1">
+      <mat-icon>open_in_browser</mat-icon>
+    </div>
+    <div class="col-8 p-0">
+      Thêm câu trả lời <span (click)="clickTextCheckbox()" style="color: blue;">Text</span> hoặc <span style="color: blue;" (click)="clickTextbox()"> Text box</span>
+    </div>
+  </div>
+  <section *ngIf="arrayCheckbox!=[]" class="example-section">
+    <div  *ngFor="let item of arrayCheckbox;let i=index" disabled="true" class="example-margin mt-2" >
+      
+      <div class="row">
+        <div class="col-1">
+    <input disabled="true" type="checkbox" name="" id="">
+
+        </div>
+        <div class="col-6 p-0">
+          <input  class="form-control" #inputcheck (change)="changeInput($event,i)" value="{{isString(item.input) ? item.input : ''}}"  type="text"> 
+        </div>
+        <div class="col-5">
+          <mat-icon style="font-size: 16px !important;" (click)="nhanInput(i)">filter_none</mat-icon> <mat-icon  (click)="deleteInput(i)">delete</mat-icon>
+        </div>
+      </div>
+      <div class="row" style="margin-left: 20px;">
+        <div  *ngIf="isString(item.img)"><img  [src]="item.img" height="30px" width="30px"></div>
+
+        <label (click)="a1(i)" style="color:blue;" for="{{i}}">tải ảnh lên</label>
+
+        <input  style="display: none;" type="file" id="{{i}}" (change)="changeInputImg($event,i)" >
+
+      </div>
+    </div>
+  
+  </section>
+ <span *ngIf="isCheckTextbox"> <input disabled="true" type="checkbox"> khác...</span>
+</div>
+  </div>
+<!-- van ban -->
+<div *ngIf="value=='nhập text' && typeQues=='văn bản'" class="content-type1">
+   <textarea disabled="true" class="form-control" rows="4" type="text" placeholder="Nhập câu trả lời..."></textarea></div>
+<!-- radio -->
+<div  *ngIf="value=='chọn đáp án' && typeQues=='radio'" class="content-type1">
+  <div class="col-4">
+    <input disabled="true" type="radio"> Đã sử dụng</div>
+       
+
+<div>
+<div class="row" style="margin-left: 5px;">
+<div class="col-1">
+  <mat-icon>open_in_browser</mat-icon>
+</div>
+<div class="col-8 p-0">
+  Thêm câu trả lời <span (click)="clickTextCheckbox()" style="color: blue;">Text</span> hoặc <span style="color: blue;" (click)="clickTextbox()"> Text box</span>
+</div>
+</div>
+<section *ngIf="arrayCheckbox!=[]" class="example-section">
+<div  *ngFor="let item of arrayCheckbox;let i=index" disabled="true" class="example-margin mt-2" >
+  
+  <div class="row">
+    <div class="col-1">
+<input disabled="true" type="radio" name="" id="">
+
+    </div>
+    <div class="col-6 p-0">
+      <input  class="form-control" #inputcheck (change)="changeInput($event,i)" value="{{isString(item.input) ? item.input : ''}}"  type="text"> 
+    </div>
+    <div class="col-5">
+      <mat-icon style="font-size: 16px !important;" (click)="nhanInput(i)">filter_none</mat-icon> <mat-icon  (click)="deleteInput(i)">delete</mat-icon>
+    </div>
+  </div>
+  <div class="row" style="margin-left: 20px;">
+    <div  *ngIf="isString(item.img)"><img  [src]="item.img" height="30px" width="30px"></div>
+
+    <label (click)="a1(i)" style="color:blue;" for="{{i}}">tải ảnh lên</label>
+
+    <input  style="display: none;" type="file" id="{{i}}" (change)="changeInputImg($event,i)" >
+
+  </div>
+</div>
+
+</section>
+<span *ngIf="isCheckTextbox"> <input disabled="true" type="radio"> khác...</span>
+</div>
+</div>
+  <!-- text li do -->
+  <div  *ngIf="value=='chọn đáp án' && typeQues=='text lí do' && isCheckedType== false" class="content-type1">
+    <div class="col-4">
+      <input disabled="true" type="radio"> Đã sử dụng</div>
+
+  <div>
+    <div class="row" style="margin-left: 5px;">
+      <div class="col-1">
+        <mat-icon>open_in_browser</mat-icon>
+      </div>
+      <div class="col-8 p-0">
+        Thêm câu trả lời <span (click)="clickTextCheckbox()" style="color: blue;">Text</span> hoặc <span style="color: blue;" (click)="clickTextbox()"> Text box</span>
+      </div>
+      </div>
+
+      <section *ngIf="arrayCheckbox!=[]" class="example-section">
+        <div  *ngFor="let item of arrayCheckbox;let i=index" disabled="true" class="example-margin mt-2" >
+          
+          <div class="row">
+            <div class="col-1">
+        <input disabled="true" type="radio" name="" id="">
+    
+            </div>
+            <div class="col-6 p-0">
+              <input  class="form-control" #inputcheck (change)="changeInput($event,i)" value="{{isString(item.input) ? item.input : ''}}"  type="text"> 
+            </div>
+            <div class="col-5">
+              <mat-icon style="font-size: 16px !important;" (click)="nhanInput(i)">filter_none</mat-icon> <mat-icon  (click)="deleteInput(i)">delete</mat-icon>
+            </div>
+          </div>
+          <div class="row" style="margin-left: 20px;">
+            <div  *ngIf="isString(item.img)"><img  [src]="item.img" height="30px" width="30px"></div>
+    
+            <label (click)="a1(i)" style="color:blue;" for="{{i}}">tải ảnh lên</label>
+    
+            <input  style="display: none;" type="file" id="{{i}}" (change)="changeInputImg($event,i)" >
+    
+          </div>
+        </div>
+      
+      </section>
+     <span *ngIf="isCheckTextbox"> <input disabled="true" type="radio"> khác...</span>
+  </div>
+    </div>
+
+<!-- isCheckedType== true -->
+
+    <div  *ngIf="value=='chọn đáp án' && typeQues=='text lí do' && isCheckedType== true" class="content-type1">
+     
+        <div class="col-4">
+          <input disabled="true" type="checkbox"> Đã sử dụng</div>
+             
+  
+  <div>
+    <div class="row" style="margin-left: 5px;">
+      <div class="col-1">
+        <mat-icon>open_in_browser</mat-icon>
+      </div>
+      <div class="col-8 p-0">
+        Thêm câu trả lời <span (click)="clickTextCheckbox()" style="color: blue;">Text</span> hoặc <span style="color: blue;" (click)="clickTextbox()"> Text box</span>
+      </div>
+    </div>
+    <section *ngIf="arrayCheckbox!=[]" class="example-section">
+      <div  *ngFor="let item of arrayCheckbox;let i=index" disabled="true" class="example-margin mt-2" >
+        
+        <div class="row">
+          <div class="col-1">
+      <input disabled="true" type="checkbox" name="" id="">
+  
+          </div>
+          <div class="col-6 p-0">
+            <input  class="form-control" #inputcheck (change)="changeInput($event,i)" value="{{isString(item.input) ? item.input : ''}}"  type="text"> 
+          </div>
+          <div class="col-5">
+            <mat-icon style="font-size: 16px !important;" (click)="nhanInput(i)">filter_none</mat-icon> <mat-icon  (click)="deleteInput(i)">delete</mat-icon>
+          </div>
+        </div>
+        <div class="row" style="margin-left: 20px;">
+          <div  *ngIf="isString(item.img)"><img  [src]="item.img" height="30px" width="30px"></div>
+  
+          <label (click)="a1(i)" style="color:blue;" for="{{i}}">tải ảnh lên</label>
+  
+          <input  style="display: none;" type="file" id="{{i}}" (change)="changeInputImg($event,i)" >
+  
+        </div>
+      </div>
+    
+    </section>
+   <span *ngIf="isCheckTextbox"> <input disabled="true" type="checkbox"> khác...</span>
+  </div>
+    </div>
+    <!-- checkbox lí do -->
+    <div  *ngIf="value=='chọn đáp án' && typeQues=='checkbox lí do' && isCheckedType==false" class="content-type1">
+
+
+      <div class="col-4">
+        <input disabled="true" type="radio"> Đã sử dụng</div>
+  <div>
+    <div class="row" style="margin-left: 5px;">
+      <div class="col-1">
+        <mat-icon>open_in_browser</mat-icon>
+      </div>
+      <div class="col-8 p-0">
+        Thêm câu trả lời <span (click)="clickTextCheckbox()" style="color: blue;">Text</span> hoặc <span style="color: blue;" (click)="clickTextbox()"> Text box</span>
+      </div>
+    </div>
+
+    <section *ngIf="arrayCheckbox!=[]" class="example-section">
+      <div  *ngFor="let item of arrayCheckbox;let i=index" disabled="true" class="example-margin mt-2" >
+        
+        <div class="row">
+          <div class="col-1" style="padding-top: 36px;">
+      <input disabled="true" type="radio" name="" id="">
+      
+          </div>
+          <div class="col-6 p-0" style="display: flex;flex-direction: column-reverse;">
+            <input  class="form-control" #inputcheck (change)="changeInput($event,i)" value="{{isString(item.input) ? item.input : ''}}"  type="text"> 
+            <button style="width: 80%;overflow: hidden;" #inputlido mat-raised-button  [disabled]="!inputcheck.value" color="warn" (click)="Updatelido(i)"> Cập nhật Lí do</button>
+
+          </div>
+          <div class="col-5"  style="padding-top: 36px;">
+            <mat-icon style="font-size: 16px !important;" (click)="nhanInput(i)">filter_none</mat-icon> <mat-icon  (click)="deleteInput(i)">delete</mat-icon>
+          </div>
+        </div>
+        <div class="row" style="margin-left: 20px;">
+          <div  *ngIf="isString(item.img)"><img  [src]="item.img" height="30px" width="30px"></div>
+      
+          <label (click)="a1(i)" style="color:blue;" for="{{i}}">tải ảnh lên</label>
+      
+          <input  style="display: none;" type="file" id="{{i}}" (change)="changeInputImg($event,i)" >
+      
+
+          <section > 
+            <div *ngIf="arrayCheckbox[i]?.inputChild?.type== 'checkbox'" style="display: flex; flex-direction: column;">
+           
+                
+            <div class="" *ngFor="let item of arrayCheckbox[i]?.inputChild?.data" >
+            <input disabled="true" type="checkbox" name="" id=""> {{isString(item.input) ? item.input : ''}}
+            </div>
+           
+      <div *ngIf="arrayCheckbox[i]?.inputChild?.isCheckTextbox"><input disabled="true" type="checkbox"> khác...</div>
+            
+          </div>
+          <div *ngIf="arrayCheckbox[i]?.inputChild?.type== 'radio'">
+            <div class="" *ngFor="let item of arrayCheckbox[i]?.inputChild?.data" >
+              <input disabled="true" type="radio" name="" id=""> {{isString(item.input) ? item.input : ''}}
+              </div>
+             
+        <div *ngIf="arrayCheckbox[i]?.inputChild?.isCheckTextbox"><input disabled="true" type="radio"> khác...</div>
+          </div>
+            </section>
+        </div>
+      </div>
+      
+      </section>
+   <span *ngIf="isCheckTextbox"> <input disabled="true" type="radio">&nbsp;&nbsp; khác...</span>
+  </div>
+        </div>
+
+
+
+        <!-- isCheckedType==true -->
+
+        <div  *ngIf="value=='chọn đáp án' && typeQues=='checkbox lí do' && isCheckedType==true" class="content-type1">
+        
+
+      <div class="col-4">
+        <input disabled="true" type="checkbox"> Đã sử dụng</div>
+  <div>
+    <div class="row" style="margin-left: 5px;">
+      <div class="col-1">
+        <mat-icon>open_in_browser</mat-icon>
+      </div>
+      <div class="col-8 p-0">
+        Thêm câu trả lời <span (click)="clickTextCheckbox()" style="color: blue;">Text</span> hoặc <span style="color: blue;" (click)="clickTextbox()"> Text box</span>
+      </div>
+    </div>
+
+    <section *ngIf="arrayCheckbox!=[]" class="example-section">
+      <div  *ngFor="let item of arrayCheckbox;let i=index" disabled="true" class="example-margin mt-2" >
+        
+        <div class="row">
+          <div class="col-1" style="padding-top: 36px;">
+      <input disabled="true" type="checkbox" name="" id="">
+      
+          </div>
+          <div class="col-6 p-0" style="display: flex;flex-direction: column-reverse;">
+            <input  class="form-control" #inputcheck (change)="changeInput($event,i)" value="{{isString(item.input) ? item.input : ''}}"  type="text"> 
+            <button style="width: 80%;overflow: hidden; " #inputlido mat-raised-button color="warn"  [disabled]="!inputcheck.value"  (click)="Updatelido(i)"> Cập nhật Lí do</button>
+
+          </div>
+          <div class="col-5"  style="padding-top: 36px;">
+            <mat-icon style="font-size: 16px !important;" (click)="nhanInput(i)">filter_none</mat-icon> <mat-icon  (click)="deleteInput(i)">delete</mat-icon>
+          </div>
+        </div>
+        <div class="row" style="margin-left: 20px;">
+          <div  *ngIf="isString(item.img)"><img  [src]="item.img" height="30px" width="30px"></div>
+      
+          <label (click)="a1(i)" style="color:blue;" for="{{i}}">tải ảnh lên</label>
+      
+          <input  style="display: none;" type="file" id="{{i}}" (change)="changeInputImg($event,i)" >
+      
+
+          <section > 
+            <div *ngIf="arrayCheckbox[i]?.inputChild?.type== 'checkbox'" style="display: flex; flex-direction: column;">
+           
+                
+            <div class="" *ngFor="let item of arrayCheckbox[i]?.inputChild?.data" >
+            <input disabled="true" type="checkbox" name="" id=""> {{isString(item.input) ? item.input : ''}}
+            </div>
+           
+      <div *ngIf="arrayCheckbox[i]?.inputChild?.isCheckTextbox"><input disabled="true" type="checkbox"> khác...</div>
+            
+          </div>
+          <div *ngIf="arrayCheckbox[i]?.inputChild?.type== 'radio'">
+            <div class="" *ngFor="let item of arrayCheckbox[i]?.inputChild?.data" >
+              <input disabled="true" type="radio" name="" id=""> {{isString(item.input) ? item.input : ''}}
+              </div>
+             
+        <div *ngIf="arrayCheckbox[i]?.inputChild?.isCheckTextbox"><input disabled="true" type="radio"> khác...</div>
+          </div>
+            </section>
+        </div>
+      </div>
+      
+      </section>
+   <span *ngIf="isCheckTextbox"> <input disabled="true" type="checkbox">&nbsp;&nbsp; khác...</span>
+  </div>
+            </div>
+        <!-- end -->
+</div>
+</div>
+<div mat-dialog-actions>
+  <button mat-dialog-close (click)="save()" style="background-color:#EA5B5B; color: white;width: 99.89px;" mat-button ><mat-icon>save</mat-icon>Lưu</button>
+  <button class="m-0" mat-button mat-dialog-close cdkFocusInitial style="background-color: #8C8A8A; color:white;"> <mat-icon>delete</mat-icon>Hủy bỏ</button>
+</div>
